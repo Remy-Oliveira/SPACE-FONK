@@ -16,6 +16,7 @@ body {
 .sidebar {
     /*position: fixed; -> Permanece fixo em uma posição específica na tela, não se desloca quando você rola a página, ele fica sempre visível no mesmo lugar. Propriedades relacionadas: top, bottom, left, right: Definem a distância do elemento em relação à borda da janela. E útil para criar elementos como menus, botões de retorno ao topo, barras de navegação, etc., que precisam estar visíveis o tempo todo*/
     position: fixed;
+    /* ficará fixada no lado esquerdo da tela, ocupando 100% da altura da janela, mesmo quando você rolar a página. */
     top: 0;
     left: 0;
     width: 260px;
@@ -29,7 +30,7 @@ body {
     align-items: center;
     width: 100%;
     height: 70px;
-    background-color: slateblue;
+    /* background-color: slateblue; */
 }
 
 .sidebar .logo-menu .logo {
@@ -42,13 +43,50 @@ body {
 .sidebar .logo-menu .toggle-btn {
     /* Estilizando a classe toggle-btn que está dentro da classe sidebar */
 
-    /* */
+    /* position: absolute -> é usada para posicionar um elemento em relação ao seu ancestral mais próximo que tenha uma posição diferente de static (como relative, absolute ou fixed). Se não houver um ancestral posicionado, o elemento será posicionado em relação ao elemento <html> (ou seja, ao topo da página).*/
     position: absolute;
+    /*Neste caso, o ancestral posicionado mais próximo é a .sidebar, que está com position: fixed. Portanto, o .toggle-btn será posicionado em relação à .sidebar.*/
+
+    /*left: 90%; -> o ícone ficará bem próximo da borda direita do .sidebar (restando apenas 10% da largura).*/
+    left: 90%;
+    /* transform: translateX(-50%); -> Ajuste fino no eixo X (horizontal), p[or ser negativo, vai para esquerda*/
+    transform: translateX(-50%);
     width: 40px;
     height: 40px;
-    background-color: salmon;
+    /*background-color: salmon;*/
     font-size: 22px;
     color: white;
     text-align: center;
+    /* line-height: 40px; -> Está sendo usado em conjunto com o height. Se os pixeis de ambos forem iguais,  Faz com que o ícone dentro do botão seja verticalmente centralizado: */
     line-height: 40px;
+    cursor: pointer;
+}
+
+.sidebar .list {
+    margin-top: 10px;
+}
+
+.sidebar .list .list-item {
+    list-style: none;
+    width: 100%;
+    height: 50px;
+    background-color: slateblue;
+    margin: 5px 0;
+    line-height: 50px;
+    /* lembra dele, neh?*/
+}
+
+.list .list-item a {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.list .list-item a i {
+    /*width: 50px; -> define uma largura fixa de 50px, ou seja, o elemento sempre terá essa largura, independentemente do tamanho do conteúdo ou da tela. */
+
+    /* min-width: 50px; -> Garante que ele nunca terá uma largura menor que 50px */
+    min-width: 50px;
+    height: 50px;
+    background-color: salmon;
 }
