@@ -10,7 +10,10 @@
 }
 
 body {
-    background-color: seagreen;
+    min-height: 100vh;
+    background: url(background.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .sidebar {
@@ -19,9 +22,22 @@ body {
     /* ficará fixada no lado esquerdo da tela, ocupando 100% da altura da janela, mesmo quando você rolar a página. */
     top: 0;
     left: 0;
-    width: 260px;
+    /* width: 260px;*/
+    width: 80px;
     height: 100%;
-    background-color: purple;
+    /*background-color: purple; */
+    background: transparent;
+    backdrop-filter: blur(40px);
+    border-right: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    padding: 6px 14px;
+    transition: .3s;
+}
+
+.sidebar.active {
+    /* sidebar.active -> Seleciona um elemento específico que tenha tanto a classe sidebar quanto a classe active ao mesmo tempo. Que no caso é o <nav> e a lista (painel) */
+    width: 260px;
+
 }
 
 .sidebar .logo-menu {
@@ -38,6 +54,13 @@ body {
     color: white;
     /*pointer-events: none; -> Desativa as interações de mouse e outros ponteiros em um elemento. Isso significa que cliques, toques ou qualquer tipo de interação com o ponteiro não terão efeito no elemento, como se ele não estivesse ali. O elemento ainda pode ser visível, mas será ignorado para fins de interação.*/
     pointer-events: none;
+    opacity: 0;
+    transition: .3s;
+}
+
+.sidebar.active .logo-menu .logo {
+    opacity: 1;
+    transition-delay: .2s;
 }
 
 .sidebar .logo-menu .toggle-btn {
@@ -48,7 +71,7 @@ body {
     /*Neste caso, o ancestral posicionado mais próximo é a .sidebar, que está com position: fixed. Portanto, o .toggle-btn será posicionado em relação à .sidebar.*/
 
     /*left: 90%; -> o ícone ficará bem próximo da borda direita do .sidebar (restando apenas 10% da largura).*/
-    left: 90%;
+    left: 50%;
     /* transform: translateX(-50%); -> Ajuste fino no eixo X (horizontal), p[or ser negativo, vai para esquerda*/
     transform: translateX(-50%);
     width: 40px;
@@ -60,6 +83,11 @@ body {
     /* line-height: 40px; -> Está sendo usado em conjunto com o height. Se os pixeis de ambos forem iguais,  Faz com que o ícone dentro do botão seja verticalmente centralizado: */
     line-height: 40px;
     cursor: pointer;
+    transition: .5s;
+}
+
+.sidebar.active .logo-menu .toggle-btn {
+    left: 90%;
 }
 
 .sidebar .list {
@@ -70,16 +98,25 @@ body {
     list-style: none;
     width: 100%;
     height: 50px;
-    background-color: slateblue;
+    /* background-color: slateblue; */
     margin: 5px 0;
     line-height: 50px;
     /* lembra dele, neh?*/
 }
 
 .list .list-item a {
+    /* display: flex; -> transforma esse link em um contêiner flexível (ou flex container). o link (a) agora expande para preencher toda a largura do elemento pai .list-item. A áera toda é clicável. Por isso o background foi completamente preenchido. Por tanto, <a> passa a ter flex-items: <i> e <span>.  */
+    display: flex;
+    align-items: center;
     font-size: 18px;
     color: white;
     text-decoration: none;
+    /* background-color: blue; */
+    border-radius: 6px;
+    transition: .3s;
+    /*  white-space: nowrap; -> está dizendo ao navegador para não quebrar o texto em várias linhas, mesmo que ele ultrapasse o limite do contêiner. */
+    white-space: nowrap;
+
 }
 
 .list .list-item a i {
@@ -88,5 +125,29 @@ body {
     /* min-width: 50px; -> Garante que ele nunca terá uma largura menor que 50px */
     min-width: 50px;
     height: 50px;
-    background-color: salmon;
+    /* background-color: salmon; */
+    text-align: center;
+    line-height: 50px;
+}
+
+/* .list .list-item.active a, */
+.list .list-item a:hover {
+    /* list-item.active -> A classe active é uma convenção para indicar visualmente que um item está ativo ou selecionado. Ela não tem um comportamento específico por si só, mas é usada em conjunto com o CSS para aplicar estilos diferenciados aos elementos ativos.*/
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.sidebar .link-name {
+    /* opacity: 0 -> propvavelmente é valor booleano, ou seja, o o text sumiu */
+    opacity: 0;
+    /* pointer-events: none; -> O elemento se torna "invisível" para eventos do mouse ou toques. Isso significa que cliques, arrastes, hovers e outros eventos não afetarão o elemento. */
+    pointer-events: none;
+    transition: opacity .3s;
+}
+
+.sidebar.active .link-name {
+    /* opacity: 1 -> propvavelmente é valor booleano, ou seja, o o text apareceu */
+    opacity: 1;
+    pointer-events: auto;
+    /* Define o atraso com base no valor de --i */
+    transition-delay: calc(.1s * var(--i));
 }
