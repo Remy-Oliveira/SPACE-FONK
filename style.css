@@ -14,6 +14,7 @@ body {
     background: url(galaxia-roxa.jpg) no-repeat;
     background-size: cover;
     background-position: center;
+    transition: .2s;
 }
 
 .sidebar {
@@ -150,4 +151,14 @@ body {
     pointer-events: auto;
     /* Define o atraso com base no valor de --i */
     transition-delay: calc(.1s * var(--i));
+}
+
+@media screen and (orientation: portrait) {
+    body {
+        min-height: 100vh;
+        background: url(galaxia-roxa.jpg) no-repeat;
+        background-size: cover;
+        background-position: calc(100%);
+        transition: .2s;
+    }
 }
